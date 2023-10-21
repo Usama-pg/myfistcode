@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Build') {
+            steps {
+                // Checkout the code from your version control system (e.g., Git)
+                git 'https://your.git.repo/project.git'
+                
+                // Build your project (e.g., Maven build)
+                sh 'mvn clean install'
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                // Deploy the application (replace this with your deployment script or tool)
+                sh './deploy.sh'
+            }
+        }
+    }
+    
+    post {
+        success {
+            // Perform actions after successful execution
+            echo 'Pipeline successfully executed!'
+        }
+        failure {
+            // Perform actions if the pipeline fails
+            echo 'Pipeline failed!'
+        }
+    }
+}
